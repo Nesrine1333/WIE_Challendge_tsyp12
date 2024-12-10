@@ -18,7 +18,7 @@ const API_URL = Constants.expoConfig.extra.apiUrl;
 
 
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({route, navigation }) {
   const initialCategories = ["Math", "Science", "Technology", "electronics"];
   const [categories, setCategories] = useState(initialCategories);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -34,6 +34,17 @@ export default function HomeScreen({ navigation }) {
     Science: require('../../../assets/science.png'),
     electronics: require('../../../assets/circuit.png'),
   };
+
+
+
+  const { studentId } = route.params;  // Access studentId passed from login
+
+  useEffect(() => {
+    // You can use studentId here to fetch or display relevant data
+    console.log("Student ID:", studentId);
+  }, [studentId]);
+
+
   // Fetch mentors from API
   useEffect(() => {
     const fetchMentors = async () => {
@@ -117,7 +128,7 @@ export default function HomeScreen({ navigation }) {
   const renderMentorCard = ({ item }) => (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => navigation.navigate('BookingForm', { mentorId: item._id })}
+      onPress={() => navigation.navigate('BookingForm', { mentorId: item._id,  studentId: studentId,  })}
     >
       <Text style={styles.name}>{item.name}</Text>
       <Text style={styles.category}>{item.category}</Text>

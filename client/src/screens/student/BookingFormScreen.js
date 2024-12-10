@@ -17,7 +17,7 @@ import Constants from 'expo-constants';
 const API_URL = Constants.expoConfig.extra.apiUrl;
 
 export default function BookingFormScreen({ route, navigation }) {
-  const { mentorId } = route.params;  // Get the mentor ID from navigation params
+  const { mentorId, studentId } = route.params;   // Get the mentor ID from navigation params
 
   const [sessionType, setSessionType] = useState('Offline');
   const [time, setTime] = useState('');
@@ -37,16 +37,42 @@ export default function BookingFormScreen({ route, navigation }) {
     };
 
     fetchMentor();
-  }, [mentorId]);
+  }, [mentorId, studentId]);
 
-  const handleBooking = () => {
-    if (sessionType === 'Online' && !link) {
-      alert('Please provide a meeting link for the online session.');
-      return;
+const handleBooking = async () => {
+  if (!mentorId || !studentId || !selectedDate || !sessionType) {
+    alert('Please provide all required details.');
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_URL}/book-session`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        mentorId,
+        studentId,
+        date: selectedDate,  // assuming selectedDate is in ISO string format
+        type: sessionType,   // online/offline
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      alert(data.message || "Session booked successfully!");
+      navigation.goBack();
+    } else {
+      const errorData = await response.json();
+      alert(errorData.error || "Booking failed. Please try again.");
     }
-    alert('Session booked successfully!');
-    navigation.goBack();
-  };
+  } catch (error) {
+    console.error("Error during booking:", error);
+    alert("An error occurred. Please try again.");
+  }
+};
+
 
   const today = new Date();
   const generateDates = () => {
@@ -91,7 +117,7 @@ export default function BookingFormScreen({ route, navigation }) {
   };
 
   if (!mentor) {
-    return <Text>Loading...</Text>;  // Show loading message until mentor data is fetched
+    return <Text>Loading...</Text>;  
   }
 
   return (
@@ -124,13 +150,14 @@ export default function BookingFormScreen({ route, navigation }) {
               onValueChange={(itemValue) => setSessionType(itemValue)}
               style={styles.picker}
             >
-              <Picker.Item label="Online" value="Online" />
-              <Picker.Item label="Offline" value="Offline" />
+              <Picker.Item label="In-person" value="in-person" />
+              <Picker.Item label="Online" value="online" />
+            
             </Picker>
           </View>
 
           {/* Meeting Link */}
-          {sessionType === 'Online' && (
+          {sessionType === 'online' && (
             <View style={styles.fieldContainer}>
               <Text style={styles.label}>Meeting Link</Text>
               <TextInput

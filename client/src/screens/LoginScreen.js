@@ -40,13 +40,13 @@ const LoginScreen = ({ navigation }) => {
         console.log("Login successful:", data);
 
         const userRole = data.user.role; 
-
+        const studentId = data.user._id;
         navigation.navigate(
           userRole === "mentor"
             ? "HomeScreenAdmin"
             : userRole === "student"
               ? "Home"
-              : "Home"
+              : "Home",{studentId}
         );
       } else {
         const errorData = await response.json();
