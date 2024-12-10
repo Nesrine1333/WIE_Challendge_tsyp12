@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React,{ useEffect, useState }  from 'react';
 import { View, Text, TouchableOpacity, StyleSheet ,Image} from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import FooterNavigation from '../../components/Footer';
@@ -44,10 +44,10 @@ const CategorySelectionScreen = ({ navigation }) => {
       <Text style={styles.label}>Date:</Text> 12th December 2024
     </Text>
     <Text style={styles.sessionDetail}>
-      <Text style={styles.label}>Mentor:</Text> Dr. Alice Johnson
+      <Text style={styles.label}>Mentor:</Text> Alice Johnson
     </Text>
     <Text style={styles.sessionDetail}>
-      <Text style={styles.label}>Topic:</Text> Advanced Mathematics
+      <Text style={styles.label}>Topic:</Text>Mathematics
     </Text>
   </View>
 
