@@ -12,9 +12,11 @@ import colors from '../../styles/colors'; // Color constants
 import { Picker } from '@react-native-picker/picker';
 import FooterNavigation from '../../components/Footer';
 import axios from 'axios';
+import Constants from 'expo-constants';
 
+const API_URL = Constants.expoConfig.extra.apiUrl;
 
-export default function BookingFormScreen({route, navigation }) {
+export default function BookingFormScreen({ route, navigation }) {
   const { mentorId } = route.params;  // Get the mentor ID from navigation params
 
   const [sessionType, setSessionType] = useState('Offline');
@@ -27,8 +29,8 @@ export default function BookingFormScreen({route, navigation }) {
   useEffect(() => {
     const fetchMentor = async () => {
       try {
-        const response = await axios.get(`http://192.168.1.37:8081/mentors/${mentorId}`);
-        setMentor(response.data);  // Set the fetched mentor data
+        const response = await axios.get(`${API_URL}/mentors/${mentorId}`);
+        setMentor(response.data);
       } catch (error) {
         console.error('Error fetching mentor:', error);
       }
@@ -182,27 +184,27 @@ export default function BookingFormScreen({route, navigation }) {
 
 const styles = StyleSheet.create({
   pickerContainer: {
-  borderWidth: 1,
-  borderColor: '#ddd',
-  borderRadius: 8,
-  backgroundColor: '#F5F5F5',
-  overflow: 'hidden', // Ensures dropdown stays inside bounds
-  
-},
-picker: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    backgroundColor: '#F5F5F5',
+    overflow: 'hidden',
 
-  color: colors.textDark, // Adjust text color
-},
+  },
+  picker: {
+
+    color: colors.textDark,
+  },
   backgroundContainer: {
     flex: 1,
-    backgroundColor:'#59426A',
+    backgroundColor: '#59426A',
     marginTop: 50,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 20,
-backgroundColor:'#59426A',
+    backgroundColor: '#59426A',
   },
   headerIcon: {
     marginRight: 15,
@@ -215,25 +217,22 @@ backgroundColor:'#59426A',
   container: {
     flex: 1,
     justifyContent: 'flex-end',
-  backgroundColor:'#59426A',
+    backgroundColor: '#59426A',
   },
   formContainer: {
- 
-  
-    // Background color
-   borderTopLeftRadius: 40, // Top-left corner
-   borderTopRightRadius: 40, 
-   shadowColor: '#fc730a',
-   shadowOpacity: 1,
-   shadowRadius: 5,
-   elevation:10,
-  
-   justifyContent:'space-between',
-   backgroundColor:'#efebe8',
- 
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    shadowColor: '#fc730a',
+    shadowOpacity: 1,
+    shadowRadius: 5,
+    elevation: 10,
+
+    justifyContent: 'space-between',
+    backgroundColor: '#efebe8',
+
     padding: 20,
     flex: 1,
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
   },
   title: {
     fontSize: 24,
@@ -244,9 +243,9 @@ backgroundColor:'#59426A',
   },
   infoContainer: {
     flexDirection: 'row',
-    height:'20%',
-    alignContent:'center',
-    alignItems:'center',
+    height: '20%',
+    alignContent: 'center',
+    alignItems: 'center',
 
     gap: 10,
     padding: 10,
@@ -254,7 +253,7 @@ backgroundColor:'#59426A',
     borderColor: colors.bordercontainer,
     borderWidth: 1,
     marginBottom: 10,
-    marginTop:20
+    marginTop: 20
   },
   photoSection: {
     width: 80,
@@ -279,7 +278,7 @@ backgroundColor:'#59426A',
     fontSize: 18,
     color: colors.textDark,
     marginBottom: 10,
-    fontWeight:'400'
+    fontWeight: '400'
   },
   input: {
     width: '100%',
@@ -295,13 +294,13 @@ backgroundColor:'#59426A',
   dateButton: {
     alignItems: 'center',
     padding: 15,
-    justifyContent:'center',
+    justifyContent: 'center',
     marginHorizontal: 5,
     borderRadius: 10,
     backgroundColor: '#eee',
-    borderWidth:1,
-    height:60,
-    borderColor:'#e4d9b4',
+    borderWidth: 1,
+    height: 60,
+    borderColor: '#e4d9b4',
   },
   selectedDateButton: {
     backgroundColor: colors.backgrnButton,
@@ -326,8 +325,8 @@ backgroundColor:'#59426A',
     backgroundColor: '#eee',
     borderRadius: 15,
     paddingVertical: 8,
-    borderWidth:1,
-    borderColor:'#e4d9b4',
+    borderWidth: 1,
+    borderColor: '#e4d9b4',
     paddingHorizontal: 15,
     margin: 5,
   },

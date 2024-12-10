@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
+import Constants from 'expo-constants';
+
+const API_URL = Constants.expoConfig.extra.apiUrl;
+
+
+
 const SignUpScreen = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -12,9 +18,9 @@ const SignUpScreen = ({ navigation }) => {
       alert("Passwords do not match!");
       return;
     }
-  
+
     try {
-      const response = await fetch("http://192.168.1.12:3000/register", {
+      const response = await fetch(`${API_URL}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -23,12 +29,12 @@ const SignUpScreen = ({ navigation }) => {
           name,
           email,
           password,
-          role: "student", // Explicitly pass the role
+          role: "student",
         }),
       });
-  
+
       const data = await response.json();
-  
+
       if (response.ok) {
         alert("Signup successful! You can now log in.");
         navigation.navigate("Login");
@@ -39,7 +45,7 @@ const SignUpScreen = ({ navigation }) => {
       alert("An error occurred. Please try again.");
     }
   };
-  
+
 
   return (
     <View style={styles.backgroundContainer}>
@@ -49,7 +55,7 @@ const SignUpScreen = ({ navigation }) => {
 
       {/* Sign Up Form */}
       <View style={styles.container}>
-      <Image source={require('../../assets/logo.png')} style={styles.logo} />
+        <Image source={require('../../assets/logo.png')} style={styles.logo} />
         <Text style={styles.title}>Create an Account</Text>
         <TextInput
           style={styles.input}
@@ -88,7 +94,7 @@ const SignUpScreen = ({ navigation }) => {
           <Text style={styles.link}>Already have an account? Log In</Text>
         </TouchableOpacity>
       </View>
-      
+
     </View>
   );
 };
@@ -96,39 +102,39 @@ const SignUpScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
-    backgroundColor: '#432E54', // Pastel base color
+    backgroundColor: '#432E54',
     position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
-    marginTop:40
+    marginTop: 40
   },
   container: {
     width: '90%',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)', // Slightly transparent white for contrast
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     borderRadius: 12,
     padding: 20,
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.3,
     shadowRadius: 10,
-  },logoContainer:{
-width:'100%',
-height:'25%',
+  }, logoContainer: {
+    width: '100%',
+    height: '25%',
 
-    alignContent:'center',
-    justifyContent:'center',
-    alignItems:'center',
-marginBottom:20
-  
+    alignContent: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20
+
   },
   logo: {
-  
 
-   width:120,
-   height:120
+
+    width: 120,
+    height: 120
 
   },
   title: {
@@ -136,7 +142,7 @@ marginBottom:20
     fontWeight: '300',
     color: '#e8a359',
     marginBottom: 20,
-  },input: {
+  }, input: {
     backgroundColor: '#FFFFFF',
     borderRadius: 8,
     width: '90%',
@@ -187,7 +193,7 @@ marginBottom:20
     borderWidth: 1,
     borderColor: '#ccc',
     backgroundColor: '#FFFFFF',
-justifyContent:'space-between',
+    justifyContent: 'space-between',
     borderRadius: 8,
     width: '90%',
     marginBottom: 20,
@@ -207,9 +213,9 @@ justifyContent:'space-between',
   buttonText: {
     color: '#e5e7da',
     fontWeight: '400',
-    letterSpacing:5
+    letterSpacing: 5
   },
-  
+
 });
 
 export default SignUpScreen;

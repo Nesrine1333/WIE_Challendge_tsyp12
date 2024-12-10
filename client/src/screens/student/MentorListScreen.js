@@ -8,7 +8,7 @@ const mentors = [
   { id: '2', name: 'Mr. John Doe', category: 'Science', status: 'Pending' },
   { id: '3', name: 'Ms. Emily White', category: 'Electronics', status: 'Confirmed' },
   { id: '4', name: 'Mr. Jake Black', category: 'Math', status: 'Pending' },
-  // Add statuses for other mentors...
+
 ];
 
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Modal, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
 const MentorSessionDetails = ({ booking, setModalVisible }) => {
-  if (!booking) return null; // Handle case where booking is null
+  if (!booking) return null;
 
   return (
     <Modal
@@ -23,7 +23,7 @@ const MentorSessionDetails = ({ booking, setModalVisible }) => {
               onPress={() => setModalVisible(false)}
             >
               <Image
-                source={require('../../../assets/approve.png')} // Replace with your icon path
+                source={require('../../../assets/approve.png')}
                 style={styles.buttonText}
               />
             </TouchableOpacity>
@@ -32,10 +32,10 @@ const MentorSessionDetails = ({ booking, setModalVisible }) => {
               onPress={() => setModalVisible(false)}
             >
               <Image
-                source={require('../../../assets/cancel.png')} // Replace with your icon path
+                source={require('../../../assets/cancel.png')} 
                 style={styles.buttonText}
-              />       
-               </TouchableOpacity>
+              />
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
   closeButton: {
     marginTop: 20,
     padding: 10,
-    backgroundColor: '#ff000000',
     borderRadius: 5,
   },
   closeButtonText: {

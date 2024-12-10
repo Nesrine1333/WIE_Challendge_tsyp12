@@ -22,7 +22,7 @@ const CategorySelectionScreen = ({ navigation }) => {
           markedDates={{
             [selectedDate]: {
               selected: true,
-              selectedColor: '#7D6E91', // Match the pastel theme
+              selectedColor: '#7D6E91', 
             },
           }}
           theme={{
@@ -153,8 +153,8 @@ justifyContent:'space-between'
   container: {
     marginTop:80,
     flex: 1,
-    justifyContent: 'flex-start', // Center content vertically
-    alignItems: 'center',    // Center content horizontally
+    justifyContent: 'flex-start', 
+    alignItems: 'center',    
     padding: 20,
   },
   title: {
@@ -167,8 +167,7 @@ justifyContent:'space-between'
     borderWidth: 1,
     borderColor: '#59426a79',
     borderRadius: 8,
-    width: '350', // Increase the width
-    // Explicitly set a larger height
+    width: '350', 
     marginBottom: 20,
     backgroundColor: '#ffffff',
   },
@@ -185,17 +184,15 @@ justifyContent:'space-between'
     fontWeight: 'bold',
   },
   footerIcon: {
-    width: 24, // Adjust the size of the icons
+    width: 24,
     height: 24,
-    // tintColor: '#F5F5F5', // White color for icons
   },
   activeIcon: {
-    tintColor: '#d87123', // Highlight the active button's icon with gold
+    tintColor: '#d87123', 
   },
 
   footer: {
     flexDirection: 'row',
-    // backgroundColor: '#59426A',
     backgroundColor: '#F5F5F5',
     borderColor:'#59426A',
     borderTopRightRadius:14,

@@ -3,6 +3,7 @@
     "name": "wieconnectstem",
     "slug": "wieconnectstem",
     "version": "1.0.0",
+   
     "orientation": "portrait",
     "icon": "./assets/logo.png",
     "userInterfaceStyle": "light",
@@ -23,6 +24,10 @@
     },
     "web": {
       "favicon": "./assets/logo.png"
+    },
+    "extra": {
+      "apiUrl": "http://192.168.1.12:3000",
+      "debug": true
     },
     "plugins": [
       "expo-font"

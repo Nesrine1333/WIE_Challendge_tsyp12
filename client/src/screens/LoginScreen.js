@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import Constants from 'expo-constants';
+
+const API_URL = Constants.expoConfig.extra.apiUrl;
 
 
-const LoginScreen = ({ navigation}) => {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const mockUsers = {
@@ -16,34 +19,34 @@ const LoginScreen = ({ navigation}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
+
+
     if (!email || !password) {
       alert('Please enter both email and password.');
       return;
     }
-  
+
     try {
-      const response = await fetch("http://192.168.1.12:3000/login", {
+      const response = await fetch(`${API_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         console.log("Login successful:", data);
-  
-        // Determine user role
-        const userRole = data.user.role; // Assuming the backend returns `role`
-        
-        // Navigate based on role
+
+        const userRole = data.user.role; 
+
         navigation.navigate(
           userRole === "mentor"
             ? "HomeScreenAdmin"
             : userRole === "student"
-            ? "Home"
-            : "Home"
+              ? "Home"
+              : "Home"
         );
       } else {
         const errorData = await response.json();
@@ -54,7 +57,7 @@ const LoginScreen = ({ navigation}) => {
       alert("An error occurred. Please try again.");
     }
   };
-  
+
   return (
     <View style={styles.backgroundContainer}>
       {/* Background Patterns */}
@@ -63,12 +66,10 @@ const LoginScreen = ({ navigation}) => {
 
       {/* Login Form */}
       <View style={styles.container}>
-      <View style={styles.logoContainer}>
-      <Image source={require('../../assets/logo.png')} style={styles.logo} />
+        <View style={styles.logoContainer}>
+          <Image source={require('../../assets/logo.png')} style={styles.logo} />
 
-      </View>
-
-
+        </View>
 
 
 
@@ -76,7 +77,9 @@ const LoginScreen = ({ navigation}) => {
 
 
 
-      
+
+
+
         <Text style={styles.title}>Welcome Back</Text>
         <TextInput
           style={styles.input}
@@ -87,7 +90,7 @@ const LoginScreen = ({ navigation}) => {
         />
         <View style={styles.passwordContainer}>
           <TextInput
-       
+
             placeholder="Password"
             placeholderTextColor="#999"
             secureTextEntry={!showPassword}
@@ -106,9 +109,9 @@ const LoginScreen = ({ navigation}) => {
           </TouchableOpacity>
         </View>
 
-       <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
           <Text style={styles.link}>Don’t have an account? Sign Up</Text>
         </TouchableOpacity>
@@ -120,39 +123,39 @@ const LoginScreen = ({ navigation}) => {
 const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
-    backgroundColor: '#432E54', // Pastel base color
+    backgroundColor: '#432E54', 
     position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
-    marginTop:40
+    marginTop: 40
   },
   container: {
     width: '90%',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)', // Slightly transparent white for contrast
+    backgroundColor: 'rgba(255, 255, 255, 0.9)', 
     borderRadius: 12,
     padding: 20,
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.3,
     shadowRadius: 10,
-  },logoContainer:{
-width:'100%',
-height:'25%',
+  }, logoContainer: {
+    width: '100%',
+    height: '25%',
 
-    alignContent:'center',
-    justifyContent:'center',
-    alignItems:'center',
-marginBottom:20
-  
+    alignContent: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20
+
   },
   logo: {
-  
 
-   width:120,
-   height:120
+
+    width: 120,
+    height: 120
 
   },
   title: {
@@ -160,7 +163,7 @@ marginBottom:20
     fontWeight: '300',
     color: '#e8a359',
     marginBottom: 20,
-  },input: {
+  }, input: {
     backgroundColor: '#FFFFFF',
     borderRadius: 8,
     width: '90%',
@@ -211,7 +214,7 @@ marginBottom:20
     borderWidth: 1,
     borderColor: '#ccc',
     backgroundColor: '#FFFFFF',
-justifyContent:'space-between',
+    justifyContent: 'space-between',
     borderRadius: 8,
     width: '90%',
     marginBottom: 20,
@@ -231,9 +234,9 @@ justifyContent:'space-between',
   buttonText: {
     color: '#e5e7da',
     fontWeight: '400',
-    letterSpacing:5
+    letterSpacing: 5
   },
-  
+
 });
 
 export default LoginScreen;

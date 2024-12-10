@@ -10,7 +10,9 @@ import {
 } from 'react-native';
 import FooterNavigation from '../../components/Footer';
 import axios from "axios"; 
+import Constants from 'expo-constants';
 
+const API_URL = Constants.expoConfig.extra.apiUrl;
 
 
 
@@ -36,9 +38,9 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     const fetchMentors = async () => {
       try {
-        const categoryQuery = selectedCategories.join(","); // Join selected categories
-        const response = await axios.get("http://192.168.1.12:3000/mentors", {
-          params: { category: categoryQuery }, // Pass category as a query parameter
+        const categoryQuery = selectedCategories.join(","); 
+        const response = await axios.get(`${API_URL}/mentors`, {
+          params: { category: categoryQuery }, 
         });
         setMentors(response.data);
         setFilteredMentors(response.data);
@@ -189,7 +191,7 @@ height:250,
   },
   imageStyle: {
     borderBottomLeftRadius: 40,
-    borderBottomRightRadius: 40,// Match the radius to the parent
+    borderBottomRightRadius: 40,
    
   },
   containerSearch: {
@@ -215,7 +217,7 @@ justifyContent:'space-between',
     backgroundColor: '#ccc',
   },
 addIcon: {
-  width: 20, // Adjust the size based on your preference
+  width: 20, 
   height: 20,
 
 },
@@ -274,8 +276,8 @@ alignSelf:'flex-start',
 flex:1
   },
   cardCat: {
-    width: 80, // Fixed width for all cards
-    height: 80, // Fixed height for all cards
+    width: 80, 
+    height: 80, 
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
@@ -288,7 +290,7 @@ flex:1
     marginBottom:40
   },
   cardIcon: {
-    width: 40, // Icon size
+    width: 40,
     height: 40,
     marginBottom: 5,
   },
@@ -297,23 +299,7 @@ flex:1
     fontWeight: '600',
     textAlign: 'center',
   },
-  // },textTag:{
-    
 
-
-  // },
-  // tag: {
-
-  //   alignContent:'center',
-  //   alignItems:'center',
-  //   alignSelf:'center',
-  //   flexDirection:'column',
-  //   textAlign:'center',
-  //   borderRadius: 15,
-  //   borderWidth: 1,
-  //   borderColor: '#a4f307',
-  //   marginRight: 10,
-  // },
   subtitle: {
     fontSize: 18,
     fontWeight: '600',
