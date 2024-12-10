@@ -37,15 +37,12 @@ export default function HomeScreen({route, navigation }) {
 
 
 
-  const { studentId } = route.params;  // Access studentId passed from login
-
+  const { studentId } = route.params;  
   useEffect(() => {
-    // You can use studentId here to fetch or display relevant data
     console.log("Student ID:", studentId);
   }, [studentId]);
 
 
-  // Fetch mentors from API
   useEffect(() => {
     const fetchMentors = async () => {
       try {
@@ -64,7 +61,6 @@ export default function HomeScreen({route, navigation }) {
     fetchMentors();
   }, [selectedCategories]);
 
-  // Handle search
   useEffect(() => {
     if (!searchQuery) {
       setFilteredMentors(mentors);
