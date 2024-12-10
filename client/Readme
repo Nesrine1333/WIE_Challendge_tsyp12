@@ -1,0 +1,92 @@
+# WieConnectSTEM
+
+## Overview
+WieConnectSTEM is a React Native application designed to enhance STEM learning and collaboration. This project leverages Expo for seamless development and deployment, enabling cross-platform compatibility for iOS, Android, and web.
+
+---
+
+## Features
+- Smooth navigation using React Navigation.
+- Calendar integration for scheduling and reminders.
+- Support for gradient backgrounds and custom fonts.
+- Fully responsive design across Android, iOS, and web platforms.
+
+---
+
+## Installation
+### Prerequisites
+- Node.js (>=14.x)
+- npm or yarn
+- Expo CLI installed globally (`npm install -g expo-cli`)
+
+### Steps
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd wieconnectstem
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run start
+   ```
+
+---
+
+## Available Scripts
+- **`npm run start`**: Starts the development server.
+- **`npm run android`**: Runs the application on an Android device or emulator.
+- **`npm run ios`**: Runs the application on an iOS device or simulator.
+- **`npm run web`**: Runs the application in a web browser.
+
+---
+
+## Dependencies
+### Core Dependencies
+- `expo`: Framework for building cross-platform applications.
+- `react` & `react-native`: Core libraries for building the application.
+
+### UI & Navigation
+- `@react-native-picker/picker`: Native picker component.
+- `@react-navigation/native` & `@react-navigation/stack`: Navigation solutions.
+- `react-native-vector-icons`: Icons for UI enhancement.
+- `react-native-linear-gradient`: Gradient backgrounds.
+
+### Additional Tools
+- `react-native-calendars`: Calendar component for scheduling.
+- `expo-font`: Custom font support.
+- `expo-linear-gradient`: Gradient support in Expo.
+- `react-native-reanimated`: Gesture and animation support.
+
+---
+
+## Development
+### Folder Structure
+- `assets/`: Contains images, fonts, and other static resources.
+- `src/`: Application source code, including components, screens, and utilities.
+
+### Debugging
+- Use Expo's developer tools for debugging in real time.
+- For animations and gestures, leverage the `react-native-reanimated` debug tools.
+
+---
+
+## Deployment
+1. Build the application for production:
+   ```bash
+   expo build <platform>
+   ```
+2. Follow Expo's publishing guidelines to deploy.
+
+---
+
+## License
+This project is licensed under the **0BSD License**.
+
+---
+
+## Contributing
+Contributions are welcome! Please submit a pull request or open an issue for feedback and suggestions.
