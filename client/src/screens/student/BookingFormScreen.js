@@ -7,8 +7,8 @@ import {
   TouchableOpacity,
   StyleSheet
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons'; // Icons
-import colors from '../../styles/colors'; // Color constants
+import Icon from 'react-native-vector-icons/MaterialIcons'; 
+import colors from '../../styles/colors'; 
 import { Picker } from '@react-native-picker/picker';
 import FooterNavigation from '../../components/Footer';
 import axios from 'axios';
@@ -17,7 +17,7 @@ import Constants from 'expo-constants';
 const API_URL = Constants.expoConfig.extra.apiUrl;
 
 export default function BookingFormScreen({ route, navigation }) {
-  const { mentorId, studentId } = route.params;   // Get the mentor ID from navigation params
+  const { mentorId, studentId } = route.params;   
 
   const [sessionType, setSessionType] = useState('Offline');
   const [time, setTime] = useState('');
@@ -54,8 +54,8 @@ const handleBooking = async () => {
       body: JSON.stringify({
         mentorId,
         studentId,
-        date: selectedDate,  // assuming selectedDate is in ISO string format
-        type: sessionType,   // online/offline
+        date: selectedDate, 
+        type: sessionType,   
       }),
     });
 
