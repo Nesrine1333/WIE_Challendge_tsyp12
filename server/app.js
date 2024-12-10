@@ -17,7 +17,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-// mongoDB connection
+
+//database connection
 mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('MongoDB connected');
@@ -34,30 +35,31 @@ mongoose.connection.once("open", () => {
   console.log("Successfully connected to MongoDB!");
 });
 
+//Dummy data
 const seedUsers = async () => {
   const users = [
     {
       name: "Alice Mentor",
       email: "alice.mentor@example.com",
-      password: "password123", // Consider hashing passwords using bcrypt
+      password: "password123",
       role: "mentor",
     },
     {
       name: "Bob Mentor",
       email: "bob.mentor@example.com",
-      password: "password123", // Consider hashing passwords using bcrypt
+      password: "password123", 
       role: "mentor",
     },
     {
       name: "Charlie Student",
       email: "charlie.student@example.com",
-      password: "password123", // Consider hashing passwords using bcrypt
+      password: "password123", 
       role: "student",
     },
     {
       name: "Dana Student",
       email: "dana.student@example.com",
-      password: "password123", // Consider hashing passwords using bcrypt
+      password: "password123", 
       role: "student",
     },
   ];
@@ -69,12 +71,6 @@ const seedUsers = async () => {
     console.error("Error seeding users:", error);
   }
 };
-
-// Call this function when initializing the app
-
-
-
-
 
 // Define Schemas
 const userSchema = new mongoose.Schema({
@@ -160,19 +156,18 @@ app.get("/bookings", async (req, res) => {
 
 
 app.get("/mentors", async (req, res) => {
-  const { category } = req.query;  // Get category filter from query parameters (optional)
+  const { category } = req.query; 
 
   try {
-    // Always filter by role "mentor"
+  
     const filter = { role: "mentor" };  
     
-    // Add category filter if provided
     if (category) {
-      filter.category = { $regex: category, $options: "i" }; // Case-insensitive regex search for category
+      filter.category = { $regex: category, $options: "i" }; 
     }
 
-    // Find mentors with the specified filter
-    const mentors = await User.find(filter).select("-password");  // Exclude password field in response
+   
+    const mentors = await User.find(filter).select("-password");  
 
     if (!mentors.length) {
       return res.status(404).json({ error: "No mentors found with the given filters" });
@@ -185,11 +180,11 @@ app.get("/mentors", async (req, res) => {
 });
 
 app.get("/mentors/:id", async (req, res) => {
-  const { id } = req.params;  // Get mentor ID from URL parameters
+  const { id } = req.params;  
   
   try {
-    // Find the mentor by ID
-    const mentor = await User.findById(id).select("-password");  // Exclude password field in response
+    /
+    const mentor = await User.findById(id).select("-password"); 
 
     if (!mentor) {
       return res.status(404).json({ error: "Mentor not found" });
